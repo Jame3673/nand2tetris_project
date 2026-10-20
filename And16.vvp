@@ -1,0 +1,47 @@
+#! /ucrt64/bin/vvp
+:ivl_version "13.0 (stable)" "(v13_0)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "C:\msys64\ucrt64\lib\ivl\system.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\msys64\ucrt64\lib\ivl\va_math.vpi";
+S_00000145dc347f80 .scope module, "And16_tb" "And16_tb" 2 4;
+ .timescale -12 -12;
+v00000145dc3482a0_0 .var "a", 15 0;
+v00000145dc32d8f0_0 .var "b", 15 0;
+v00000145dc32d990_0 .net "out", 15 0, L_00000145dc348340;  1 drivers
+S_00000145dc348110 .scope module, "iAnd16" "And16" 2 9, 3 1 0, S_00000145dc347f80;
+ .timescale -12 -12;
+    .port_info 0 /INPUT 16 "a";
+    .port_info 1 /INPUT 16 "b";
+    .port_info 2 /OUTPUT 16 "out";
+L_00000145dc348340 .functor AND 16, v00000145dc3482a0_0, v00000145dc32d8f0_0, C4<1111111111111111>, C4<1111111111111111>;
+v00000145dc3279e0_0 .net "a", 15 0, v00000145dc3482a0_0;  1 drivers
+v00000145dc32ecd0_0 .net "b", 15 0, v00000145dc32d8f0_0;  1 drivers
+v00000145dc328ec0_0 .net "out", 15 0, L_00000145dc348340;  alias, 1 drivers
+    .scope S_00000145dc347f80;
+T_0 ;
+    %vpi_call 2 12 "$dumpfile", "And16_wave.vcd" {0 0 0};
+    %vpi_call 2 13 "$dumpvars", 32'sb00000000000000000000000000000000, S_00000145dc347f80 {0 0 0};
+    %vpi_call 2 15 "$monitor", "time=%0dt | a=%h, b=%h | out=%h", $time, v00000145dc3482a0_0, v00000145dc32d8f0_0, v00000145dc32d990_0 {0 0 0};
+    %pushi/vec4 65535, 0, 16;
+    %store/vec4 v00000145dc3482a0_0, 0, 16;
+    %pushi/vec4 255, 0, 16;
+    %store/vec4 v00000145dc32d8f0_0, 0, 16;
+    %delay 5, 0;
+    %pushi/vec4 10, 0, 16;
+    %store/vec4 v00000145dc3482a0_0, 0, 16;
+    %pushi/vec4 5, 0, 16;
+    %store/vec4 v00000145dc32d8f0_0, 0, 16;
+    %delay 5, 0;
+    %vpi_call 2 20 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    ".\And16_tb.v";
+    "./And16.v";
