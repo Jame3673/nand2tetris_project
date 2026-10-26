@@ -9,7 +9,7 @@ wire [15:0]out;
 And16 iAnd16 (.a(a), .b(b), .out(out));
 initial begin
 
-    $dumpfile("And16_wave.vcd");
+    $dumpfile("wave/And16_wave.vcd");
     $dumpvars(0, And16_tb);
 
     $monitor("time=%0dt | a=%h, b=%h | out=%h", $time, a, b, out);

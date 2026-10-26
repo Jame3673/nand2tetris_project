@@ -10,7 +10,7 @@ module Add16_tb ();
     Add16 dut(.a(a), .b(b), .out(out), .cout(cout));
 
     initial begin
-    $dumpfile("Add16_wave.vcd");
+    $dumpfile("wave/Add16_wave.vcd");
     $dumpvars(0, Add16_tb);
 
     $monitor("TIME %0dt | a=%b , b=%b , out=%b , cout=%b", $time, a, b, out, cout);

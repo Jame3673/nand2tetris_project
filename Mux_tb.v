@@ -10,7 +10,7 @@ wire out;
 
 Mux iMux(.a(a), .b(b), .sel(sel), .out(out));
 initial begin
-    $dumpfile("Mux_wave.vcd");
+    $dumpfile("wave/Mux_wave.vcd");
     $dumpvars(0, Mux_tb);
 
     $display("| a | b | sel | out | TIME |");

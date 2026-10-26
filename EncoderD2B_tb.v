@@ -34,7 +34,7 @@ module EncoderD2B_tb ();
         .d(d)
     );
     initial begin
-        $dumpfile("EncoderD2B_wave.vcd");
+        $dumpfile("wave/EncoderD2B_wave.vcd");
         $dumpvars(0, EncoderD2B_tb);
         $monitor("time %0dt | in0=%b in1=%b in2=%b in3=%b in4=%b in5=%b in6=%b in7=%b in8=%b in9=%b | %b%b%b%b",
             $time, in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, a, b, c, d);

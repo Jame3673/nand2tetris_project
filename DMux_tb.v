@@ -9,7 +9,7 @@ wire b;
 
 DMux iDMux(.in(in), .sel(sel), .a(a), .b(b));
 initial begin
-    $dumpfile("DMux_wave.vcd");
+    $dumpfile("wave/DMux_wave.vcd");
     $dumpvars(0, DMux_tb);
 
     $monitor("time %0dt | in=%b, sel=%b, a=%b, b=%b", $time, in, sel, a, b);

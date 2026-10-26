@@ -9,7 +9,7 @@ module HalfAdder_tb ();
 
     HalfAdder dut(.a(a), .b(b), .out(out), .cout(cout));
     initial begin
-        $dumpfile("HalfAdder_wave.vcd");
+        $dumpfile("wave/HalfAdder_wave.vcd");
         $dumpvars(0, HalfAdder_tb);
 
         $monitor("time=%0dt | a=%b, b=%b | cout=%b, out=%b", $time, a, b, cout, out);

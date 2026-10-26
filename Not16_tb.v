@@ -8,7 +8,7 @@ wire [15:0]out;
 Not16 iNot16 (.in(in), .out(out));
 initial begin
 
-    $dumpfile("Not16_wave.vcd");
+    $dumpfile("wave/Not16_wave.vcd");
     $dumpvars(0, Not16_tb);
 
     $monitor("time=%0dt | in=%b | out=%b", $time, in, out);

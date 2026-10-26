@@ -11,6 +11,8 @@ module DMux2x4_tb ();
     integer i;
 
     DMux2x4 dut(.sel0(sel0), .sel1(sel1), .out0(out0), .out1(out1), .out2(out2), .out3(out3));
+    $dumpfile("wave/DMux2x4_wave.vcd");
+    $dumpvars(0, DMux2x4_tb);
     initial begin
         $monitor("Time %0dt | sel0=%b sel1=%b | out3=%b out2=%b out1=%b out0=%b", $time, sel0, sel1, out3, out2, out1, out0);
         sel0=1'b0; sel1=1'b0; #5;

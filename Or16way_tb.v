@@ -10,7 +10,7 @@ module Or16way_tb ();
     integer i;
 
     initial begin
-        $dumpfile("Or16way_wave.vcd");
+        $dumpfile("wave/Or16way_wave.vcd");
         $dumpvars(0, Or16way_tb);
         $monitor("Time %0dt | a=%b out=%b", $time, a, out);
         a=16'b0000000000000000; #5;

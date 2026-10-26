@@ -10,7 +10,7 @@ module FullAdder_tb ();
 
     FullAdder dut(.a(a), .b(b), .cin(cin), .out(out), .cout(cout));
     initial begin
-        $dumpfile("FullAdder_wave.vcd");
+        $dumpfile("wave/FullAdder_wave.vcd");
         $dumpvars(0, FullAdder_tb);
 
         $monitor("time=%0dt | a=%b, b=%b, cin=%b | cout=%b, out=%b", $time, a, b, cin, cout, out);
