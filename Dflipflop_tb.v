@@ -16,7 +16,8 @@ module Dflipflop_tb ();
         en=1; d=1; #5;
         en=1; d=0; #5;
         en=0; d=1; #5;
-        en=0; d=0; #5; 
+        en=0; d=0; #5;
+        $finish;
     end
 
 endmodule
