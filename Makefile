@@ -1,5 +1,5 @@
 %.vvp : %_tb.v
-	iverilog -o run/$@ $<
+	iverilog -o run/$@ -Wall $<
 
 
 
