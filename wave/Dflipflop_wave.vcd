@@ -1,0 +1,42 @@
+$date
+	Mon Oct 26 20:18:41 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module Dflipflop_tb $end
+$var wire 1 ! q $end
+$var wire 1 " notq $end
+$var reg 1 # d $end
+$var reg 1 $ en $end
+$scope module dut $end
+$var wire 1 # d $end
+$var wire 1 $ en $end
+$var wire 1 " notq $end
+$var wire 1 ! q $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+1$
+1#
+0"
+1!
+$end
+#5
+0!
+1"
+0#
+#10
+1#
+0$
+#15
+0#
+#20
