@@ -10,12 +10,6 @@ module Mux8way16 (
     input wire [2:0] sel,
     output reg [15:0] out
 );
-    reg [15:0] o0;
-    reg [15:0] o1;
-    reg [15:0] o2;
-    reg [15:0] o3;
-    reg [15:0] o4;
-    reg [15:0] o5;
 
 always @(*) begin
     case (sel)
