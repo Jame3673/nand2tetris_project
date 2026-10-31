@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module Dflipflop (
     input wire d,
     input wire en,

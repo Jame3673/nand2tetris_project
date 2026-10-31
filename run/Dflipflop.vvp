@@ -7,60 +7,61 @@
 :vpi_module "C:\msys64\ucrt64\lib\ivl\vhdl_textio.vpi";
 :vpi_module "C:\msys64\ucrt64\lib\ivl\v2005_math.vpi";
 :vpi_module "C:\msys64\ucrt64\lib\ivl\va_math.vpi";
-S_00000258b74cecb0 .scope module, "Dflipflop_tb" "Dflipflop_tb" 2 4;
- .timescale -12 -12;
-v00000258b74c8b20_0 .var "d", 0 0;
-v00000258b74c8bc0_0 .var "en", 0 0;
-v00000258b7424130_0 .net "notq", 0 0, L_00000258b7424680;  1 drivers
-v00000258b7424270_0 .net "q", 0 0, L_00000258b74c7bb0;  1 drivers
-S_00000258b74cee40 .scope module, "dut" "Dflipflop" 2 10, 3 1 0, S_00000258b74cecb0;
- .timescale -12 -12;
+S_000001708ffa8fe0 .scope module, "Dflipflop_tb" "Dflipflop_tb" 2 4;
+ .timescale -9 -12;
+v000001708ff88b10_0 .var "d", 0 0;
+v0000017090004a30_0 .var "en", 0 0;
+v0000017090004f30_0 .net "notq", 0 0, L_0000017090005910;  1 drivers
+v0000017090004850_0 .net "q", 0 0, L_000001708ff87bf0;  1 drivers
+S_000001708ff88980 .scope module, "dut" "Dflipflop" 2 10, 3 2 0, S_000001708ffa8fe0;
+ .timescale -9 -12;
     .port_info 0 /INPUT 1 "d";
     .port_info 1 /INPUT 1 "en";
     .port_info 2 /OUTPUT 1 "q";
     .port_info 3 /OUTPUT 1 "notq";
-L_00000258b74c7790 .functor NAND 1, v00000258b74c8bc0_0, v00000258b74c8b20_0, C4<1>, C4<1>;
-L_00000258b74c7bb0 .functor NAND 1, L_00000258b7424680, L_00000258b74c7790, C4<1>, C4<1>;
-L_00000258b74244c0 .functor NOT 1, v00000258b74c8b20_0, C4<0>, C4<0>, C4<0>;
-L_00000258b74246f0 .functor NAND 1, v00000258b74c8bc0_0, L_00000258b74244c0, C4<1>, C4<1>;
-L_00000258b7424680 .functor NAND 1, L_00000258b74c7bb0, L_00000258b74246f0, C4<1>, C4<1>;
-v00000258b74ce830_0 .net *"_ivl_0", 0 0, L_00000258b74c7790;  1 drivers
-v00000258b74ce8d0_0 .net *"_ivl_4", 0 0, L_00000258b74244c0;  1 drivers
-v00000258b74cd540_0 .net *"_ivl_6", 0 0, L_00000258b74246f0;  1 drivers
-v00000258b74cd5e0_0 .net "d", 0 0, v00000258b74c8b20_0;  1 drivers
-v00000258b74c8940_0 .net "en", 0 0, v00000258b74c8bc0_0;  1 drivers
-v00000258b74c89e0_0 .net "notq", 0 0, L_00000258b7424680;  alias, 1 drivers
-v00000258b74c8a80_0 .net "q", 0 0, L_00000258b74c7bb0;  alias, 1 drivers
-    .scope S_00000258b74cecb0;
+L_000001708ff877d0 .functor NAND 1, v0000017090004a30_0, v000001708ff88b10_0, C4<1>, C4<1>;
+L_000001708ff87bf0 .functor NAND 1, L_0000017090005910, L_000001708ff877d0, C4<1>, C4<1>;
+L_0000017090005bb0 .functor NOT 1, v000001708ff88b10_0, C4<0>, C4<0>, C4<0>;
+L_0000017090005c20 .functor NAND 1, v0000017090004a30_0, L_0000017090005bb0, C4<1>, C4<1>;
+L_0000017090005910 .functor NAND 1, L_000001708ff87bf0, L_0000017090005c20, C4<1>, C4<1>;
+v000001708ff8eb00_0 .net *"_ivl_0", 0 0, L_000001708ff877d0;  1 drivers
+v000001708ff8eba0_0 .net *"_ivl_4", 0 0, L_0000017090005bb0;  1 drivers
+v000001708ff873d0_0 .net *"_ivl_6", 0 0, L_0000017090005c20;  1 drivers
+v000001708ff8e430_0 .net "d", 0 0, v000001708ff88b10_0;  1 drivers
+v000001708ff8e4d0_0 .net "en", 0 0, v0000017090004a30_0;  1 drivers
+v000001708ffa9170_0 .net "notq", 0 0, L_0000017090005910;  alias, 1 drivers
+v000001708ffa9210_0 .net "q", 0 0, L_000001708ff87bf0;  alias, 1 drivers
+    .scope S_000001708ffa8fe0;
 T_0 ;
     %vpi_call 2 12 "$dumpfile", "wave/Dflipflop_wave.vcd" {0 0 0};
-    %vpi_call 2 13 "$dumpvars", 32'sb00000000000000000000000000000000, S_00000258b74cecb0 {0 0 0};
-    %vpi_call 2 15 "$monitor", "Time %t |en=%b| d=%b q=%b notq=%b", $time, v00000258b74c8bc0_0, v00000258b74c8b20_0, v00000258b7424270_0, v00000258b7424130_0 {0 0 0};
+    %vpi_call 2 13 "$dumpvars", 32'sb00000000000000000000000000000000, S_000001708ffa8fe0 {0 0 0};
+    %vpi_call 2 15 "$monitor", "Time %t |en=%b| d=%b q=%b notq=%b", $time, v0000017090004a30_0, v000001708ff88b10_0, v0000017090004850_0, v0000017090004f30_0 {0 0 0};
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v00000258b74c8bc0_0, 0, 1;
+    %store/vec4 v0000017090004a30_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v00000258b74c8b20_0, 0, 1;
-    %delay 5, 0;
+    %store/vec4 v000001708ff88b10_0, 0, 1;
+    %delay 5000, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v00000258b74c8bc0_0, 0, 1;
+    %store/vec4 v0000017090004a30_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v00000258b74c8b20_0, 0, 1;
-    %delay 5, 0;
+    %store/vec4 v000001708ff88b10_0, 0, 1;
+    %delay 5000, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v00000258b74c8bc0_0, 0, 1;
+    %store/vec4 v0000017090004a30_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v00000258b74c8b20_0, 0, 1;
-    %delay 5, 0;
+    %store/vec4 v000001708ff88b10_0, 0, 1;
+    %delay 5000, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v00000258b74c8bc0_0, 0, 1;
+    %store/vec4 v0000017090004a30_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v00000258b74c8b20_0, 0, 1;
-    %delay 5, 0;
+    %store/vec4 v000001708ff88b10_0, 0, 1;
+    %delay 5000, 0;
+    %vpi_call 2 20 "$finish" {0 0 0};
     %end;
     .thread T_0;
 # The file index is used to find the file name in the following table.
 :file_names 4;
     "N/A";
     "<interactive>";
-    ".\Dflipflop_tb.v";
+    "Dflipflop_tb.v";
     "./Dflipflop.v";

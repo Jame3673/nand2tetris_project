@@ -1,3 +1,4 @@
+`timescale 1ns / 1ps
 module DMux8way (
     input wire in,
     input wire [2:0] sel,
