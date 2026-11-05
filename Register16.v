@@ -1,20 +1,19 @@
 `timescale 1ns / 1ps
-`include "Register.v"
 
 module Register16 (
     input wire clk,
     input wire load,
     input wire [15:0] d,
-    output wire [15:0] q,
-    output wire [15:0] notq
+    output reg [15:0] q,
+    output reg [15:0] notq
 );
 
-    genvar i;
-    generate 
-        for (i = 0; i<16 ; i = i+1 ) begin : gen_reg
-            Register Reg(.clk(clk), .load(load), .d(d[i]), .q(q[i]), .notq(notq[i]));        
+    always @(posedge clk) begin
+        if (load) begin
+            q <= d;
+            notq <= ~d;
         end
-    endgenerate
+    end
 
     
 endmodule
