@@ -21,7 +21,7 @@ module Memory_tb();
         $monitor ("time %t %b| outM=%b addressM=%b | writeM=%b | out=%b",
         $time, clk, outM, addressM, writeM, out);
 
-        // RAM space for display 0 -> 16383
+        // RAM space for containing 0 -> 16383
         // RAM space for display 0 -> 8191
 
         outM=16'd1; addressM=15'b000000000001111; writeM=1; #5;
