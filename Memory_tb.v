@@ -18,14 +18,14 @@ module Memory_tb();
     Memory dui(.clk(clk), .in(outM), .load(writeM), .address(addressM), .out(out));
 
     initial begin
-        $monitor ("time %t, %b| outM=%b addressM=%b | writeM=%b | out=%b",
+        $monitor ("time %t %b| outM=%b addressM=%b | writeM=%b | out=%b",
         $time, clk, outM, addressM, writeM, out);
 
-        // RAM space for display 16001 -> 24000
+        // RAM space for display 0 -> 16383
+        // RAM space for display 0 -> 8191
 
-
-        outM=16'd1; addressM=15'd16001; writeM=1; #5;
-        outM=16'd3; addressM=15'd16001; writeM=1; #5;
+        outM=16'd1; addressM=15'b000000000001111; writeM=1; #5;
+        outM=16'd3; addressM=15'b100000000000001; writeM=1; #5;
 
          
 
