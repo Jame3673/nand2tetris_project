@@ -8,6 +8,8 @@ module Memory_tb();
     reg [14:0] addressM; 
     wire [15:0] out;
 
+    wire addr; 
+
     initial begin
       clk = 0;
       forever begin
@@ -15,11 +17,11 @@ module Memory_tb();
       end
     end
 
-    Memory dui(.clk(clk), .in(outM), .load(writeM), .address(addressM), .out(out));
+    Memory dui(.clk(clk), .in(outM), .load(writeM), .address(addressM), .out(out), .addr(addr));
 
     initial begin
-        $monitor ("time %t %b| outM=%b addressM=%b | writeM=%b | out=%b",
-        $time, clk, outM, addressM, writeM, out);
+        $monitor ("time %t %b| outM=%b addressM=%b | writeM=%b |addr[14]=%b out=%b",
+        $time, clk, outM, addressM, writeM, addr, out);
 
         // RAM space for containing 0 -> 16383
         // RAM space for display 0 -> 8191

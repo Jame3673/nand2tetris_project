@@ -5,8 +5,13 @@ module Memory(
     input wire [15:0] in,
     input wire load,
     input wire [14:0] address,
-    output wire [15:0] out
+    output wire [15:0] out,
+
+    output wire addr14
 );
+
+// check the final Mux gate
+assign addr14 = address[14];
 
 reg [15:0] ram [0:16383];
 reg [15:0] display [0:8191];
