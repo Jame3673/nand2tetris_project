@@ -8,7 +8,7 @@ module Rom16k(
     reg [15:0] rom [0:16383];
 
     initial begin
-        $readmemb("./data/jmp.dat", rom);
+        $readmemb("./data/test.dat", rom);
     end
 
     assign out = rom[address];
