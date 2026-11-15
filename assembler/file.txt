@@ -1,0 +1,12 @@
+      @1
+D=A
+M=D     // add 1 to R1
+
+@2      
+D=A     // D=2
+
+@1      // call R1
+D = D - M   // D = 2 - 1 = 1
+
+@DISPLAY//call dispay ram
+M=D     //
