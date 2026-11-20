@@ -1,10 +1,10 @@
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include <ctype.h>
 
-#define MAX_LINES 1000
-#define MAX_LENGTH 256
+#define MAX_LINES 100
+#define MAX_LENGTH 100
 #define MAX_DEST 10
 #define MAX_COMP 10
 #define MAX_JUMP 10
@@ -14,14 +14,6 @@ typedef struct C_table
     char *key;
     char *value;
 } TABLE;
-
-typedef struct {
-    char name[50];
-    int address;
-} Symbol;
-
-Symbol symbolTable[200];
-int symbolCount = 0;
 
 TABLE dest_table[] = {
     {"",    "000"},
@@ -51,68 +43,56 @@ TABLE jump_table[] = {
     {"JLT", "100"}, {"JNE", "101"}, {"JLE", "110"}, {"JMP", "111"}
 };
 
-void addSymbol(const char* name, int address) {
-    for (int i = 0; i < symbolCount; i++) {
-        if (strcmp(symbolTable[i].name, name) == 0) {
-            symbolTable[i].address = address;
-            return;
-        }
-    }
-    strcpy(symbolTable[symbolCount].name, name);
-    symbolTable[symbolCount].address = address;
-    symbolCount++;
-}
-
-int getSymbolAddress (const char *name) {
-    for (int i = 0; i < symbolCount; i++)
+int isBlank(const char* str) {
+    while (*str != '\0')
     {
-        if(strcmp(symbolTable[i].name, name) == 0) {
-            return symbolTable[i].address;
+        if (!isspace((unsigned char)*str)) {
+            return 0;
         }
+        str++;
     }
-    return -1;
+    return -1;   
 }
 
-void intToBinary16(int value, char *binary_out) {
-    binary_out[0] = '0'; // Bit đầu tiên của A-instruction luôn là 0
-    for (int i = 14; i >= 0; i--) {
-        binary_out[15 - i] = ((value >> i) & 1) ? '1' : '0';
-    }
-    binary_out[16] = '\0';
-}
+void removeSpace (char *str) {
+    int len = strlen(str);
+    int j =0;
 
-void A_translate(const char *line, char *binary_out, int *next_ram_addr) {
-    const char *symbol = line + 1;
-    int address = 0;
-
-    if (isdigit((unsigned char)symbol[0])) {
-        // Trường hợp 1: Sau @ là hằng số (ví dụ: @2, @100)
-        address = atoi(symbol);
-    } else {
-        address = getSymbolAddress(symbol);
-        if (address == -1) {
-            address = *next_ram_addr;
-            addSymbol(symbol, address);
-            (*next_ram_addr)++;
+    for (int i = 0; i < len; i++ ) {
+        if (str[i] != ' ')
+        {
+            str[j] = str[i];
+            j++;
         }
     }
 
-    intToBinary16(address, binary_out);
+    str[j] = '\0';
 }
 
-void initPredefinedSymbols() {
-    char regName[10];
-    for (int i = 0; i <= 15; i++) {
-        snprintf(regName, sizeof(regName), "R%d", i);
-        addSymbol(regName, i);
+void removeComment(char *str) {
+    char *comment = strstr(str, "//");
+    if (comment != NULL){
+        *comment = '\0';
     }
-    addSymbol("SP", 0);
-    addSymbol("LCL", 1);
-    addSymbol("ARG", 2);
-    addSymbol("THIS", 3);
-    addSymbol("THAT", 4);
-    addSymbol("DISPLAY", 16384);
-    addSymbol("KBD", 24576);
+}
+
+void trimstr(char *str) {
+    char *start = str;
+    while ( *start == ' ' ||
+            *start == '\t'||
+            *start == '\r'||
+            *start == '\n') start++;
+    if (start != str) memmove(str, start, strlen(start) + 1);
+
+    if (*str == '\0') return;
+
+    char *end = str + strlen(str) - 1;
+    while(  end >= str && (
+            *end == ' ' ||
+            *end == '\n' ||
+            *end == '\r' ||
+            *end == '\t' )) end--;
+    *(end + 1) = '\0';
 }
 
 const char *checkTable(TABLE table[], int size, char *key) {
@@ -177,66 +157,29 @@ int C_translate(const char *line, char *binary_out) {
     return 1;
 }
 
+void intToBinary16(int value, char *binary_out) {
+    binary_out[0] = '0'; // A-instruction first bit is 0
+    for (int i = 14; i >= 0; i--) {
+        binary_out[15 - i] = ((value >> i) & 1) ? '1' : '0';
+    }
+    binary_out[16] = '\0';
+}
 
-void removeSpace (char *str) {
-    int len = strlen(str);
-    int j =0;
-
-    for (int i = 0; i < len; i++ ) {
-        if (str[i] != ' ')
-        {
-            str[j] = str[i];
-            j++;
-        }
+void A_translate_number(const char* line, char *binary_out) {
+    const char *symbol = line + 1;
+    int n = 0;
+    
+    if (isdigit((unsigned char)symbol[0])) {
+        n = atoi(symbol);
     }
 
-    str[j] = '\0';
+    intToBinary16(n, binary_out);
 }
 
-int isBlankLine(const char *str) {
-    char ch;
 
-    do
-    {
-        ch = *(str++);
-
-        // Check non whitespace character
-        if(ch != ' ' && ch != '\t' && ch != '\n' && ch != '\r' && ch != '\0')
-            return 0;
-
-    } while (ch != '\0');
-
-    return 1;
-}
-
-void removeComment(char *str) {
-    char *comment = strstr(str, "//");
-    if (comment != NULL){
-        *comment = '\0';
-    }
-}
-
-void trimstr(char *str) {
-    char *start = str;
-    while ( *start == ' ' ||
-            *start == '\t'||
-            *start == '\r'||
-            *start == '\n') start++;
-    if (start != str) memmove(str, start, strlen(start) + 1);
-
-    if (*str == '\0') return;
-
-    char *end = str + strlen(str) - 1;
-    while(  end >= str && (
-            *end == ' ' ||
-            *end == '\n' ||
-            *end == '\r' ||
-            *end == '\t' )) end--;
-    *(end + 1) = '\0';
-}
 
 int main() {
-    FILE *file = fopen("file.txt", "r");
+    FILE *file = fopen("file2.txt", "r");
     if (file == NULL) {
         printf("ERROR: file not detected or cannot read!\n");
         return 1;
@@ -245,8 +188,7 @@ int main() {
     char lines[MAX_LINES][MAX_LENGTH];
     char temp[MAX_LENGTH];
     int count = 0;
-    char binary[17];
-    int next_ram_addr = 16;
+    char *binary;
 
     // Read file and don't read blank line, then add contain to lines[][]
     while (count < MAX_LINES && fgets(temp, MAX_LENGTH, file) != NULL)
@@ -255,8 +197,7 @@ int main() {
         trimstr(temp);
         removeSpace(temp);
 
-        if (!isBlankLine(temp)) {
-            temp[strcspn(temp, "\r\n")] = '\0';
+        if (!isBlank(temp)) {
             strcpy(lines[count], temp);
             count++;
         }
@@ -264,19 +205,10 @@ int main() {
     
     fclose(file);
 
-    int rom_address = 0;
-    for (int i = 0; i < count; i++) {
-        if (lines[i][0] == '(') {
-            char label_name[50];
-            int len = strlen(lines[i]);
-            strncpy(label_name, lines[i] + 1, len - 2);
-            label_name[len - 2] = '\0';
 
-            addSymbol(label_name, rom_address);
-        } else {
-            rom_address++; // Chỉ tăng địa chỉ ROM cho lệnh thật (A và C)
-        }
-    }
+
+
+
 
     FILE *outfile = fopen("outfile.dat", "w");
     if (outfile == NULL) {
@@ -284,32 +216,22 @@ int main() {
         return 1;
     }
 
-    for (int i = 0; i < count; i++) {
-        if (lines[i][0] == '(') {
-            // 1. Tách lấy tên nhãn bên trong cặp ngoặc (ví dụ: "(LOOP)" -> "LOOP")
-            char label_name[MAX_LENGTH];
-            int len = strlen(lines[i]);
-            strncpy(label_name, lines[i] + 1, len - 2);
-            label_name[len - 2] = '\0';
-
-            // 2. Lấy địa chỉ ROM đã lưu ở Pass 1 và xuất ra định dạng @<HEX> của Verilog
-            int label_addr = getSymbolAddress(label_name);
-            fprintf(outfile, "@%04X\n", label_addr); 
-        } 
-        else if (lines[i][0] == '@') {
-            // Dịch A-instruction (ví dụ: @LOOP sẽ dịch cùng giá trị label_addr sang 16-bit)
-            A_translate(lines[i], binary, &next_ram_addr);
+    for (int i = 0; i < count; i++)
+    {
+        if (lines[i][0] == '@')
+        {
+            A_translate_number(lines[i], binary);
             fprintf(outfile, "%s\n", binary);
-        } 
-        else {
-            // Dịch C-instruction
-            if (C_translate(lines[i], binary)) {
+        }
+        
+        if (C_translate(lines[i], binary)) {
                 fprintf(outfile, "%s\n", binary);
             } else {
                 printf("Syntax error at line %d: %s\n", i + 1, lines[i]);
             }
-        }
     }
+    
+    
 
     fclose(outfile);
 

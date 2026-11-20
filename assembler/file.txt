@@ -17,7 +17,7 @@ M=D         // R0 = 3 (Số lần cộng)
     @R0
     D=M
     @END
-    D;JLE   // Nếu R0 <= 0 thì thoát vòng lặp ngay (xử lý được cả trường hợp nhân với 0)
+    D;JLE 
 
     @R2
     D=M     // Lấy tổng hiện tại ở R2
