@@ -5,10 +5,10 @@ module Rom16k(
     output wire [15:0] out
 );
 
-    reg [15:0] rom [0:16383];
+    reg [15:0] rom [0:32767];
 
     initial begin
-        $readmemb("./data/jmp.dat", rom);
+        $readmemb("./data/test.dat", rom);
     end
 
     assign out = rom[address];

@@ -15,11 +15,12 @@ module computer_tb();
     computer dui(.clk(clk), .reset(reset));
 
     initial begin
-        reset=1'b1; #10;
-        reset=1'b0; #100;
+      $monitor("Time=%0t | rst=%b | PC=%0d | memOut=%b", 
+      $time, reset, dui.icpu.pc, dui.imem.out);
 
-        $display("Time %t | %b", $time, dui.imem.out);
-        $finish;
+      reset = 1'b1; #10;
+      reset = 1'b0; #100;
+      $finish;
     end
 
 endmodule
