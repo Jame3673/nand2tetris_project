@@ -17,7 +17,7 @@ module computer_tb();
 
     initial begin
       // Mở file text để ghi ("w" = ghi đè mới mỗi lần chạy)
-      log_fd = $fopen("sim_log.txt", "w");
+      log_fd = $fopen("./data/sim_log.txt", "w");
       if (log_fd == 0) begin
         $display("Khong mo duoc file log!");
         $finish;

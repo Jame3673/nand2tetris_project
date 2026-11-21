@@ -1,0 +1,17 @@
+@1
+D=A
+@2
+D=D-A
+
+(LOOP)
+    @HALT
+    D;JGT
+
+    D=D+1
+
+    @LOOP
+    0;JMP
+    
+(HALT)
+    @DISPLAY
+    M=D

@@ -2,15 +2,15 @@
 @R2
 M=0         // R2 = 0 (Tổng tích lũy ban đầu)
 
-@2
+@5
 D=A
 @R1
-M=D         // R1 = 2 (Số bị nhân)
+M=D         // R1 = 5 (Số bị nhân)
 
-@3
+@5
 D=A
 @R0
-M=D         // R0 = 3 (Số lần cộng)
+M=D         // R0 = 5 (Số lần cộng)
 
 // --- VÒNG LẶP CỘNG DỒN ---
 (LOOP)

@@ -1,0 +1,8 @@
+@5
+D=A
+
+@3
+D = D + A
+
+@SCREEN
+M=D

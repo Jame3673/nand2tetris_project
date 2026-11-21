@@ -192,7 +192,7 @@ int getSymbolAddress(const char *name) {
             return symbolTable[i].rom_addr;
         }
     }
-    return -1; // Không tìm thấy
+    return -1;
 }
 
 int next_ram_addr = 16;
@@ -207,7 +207,6 @@ void A_translate(const char *line, char *binary_out) {
     } else {
         n = getSymbolAddress(symbol);
         if (n == -1) {
-            // Nếu không phải nhãn (LOOP) hay symbol mặc định -> là biến mới, cấp phát RAM từ 16
             n = next_ram_addr;
             addSymbol(symbol, n);
             next_ram_addr++;
@@ -260,19 +259,29 @@ void initPredefinedSymbols() {
 }
 
 
-int main() {
+int main(int argc, char* argv[]) {
     initPredefinedSymbols();
-
-    FILE *file = fopen("file.txt", "r");
+    
+    char lines[MAX_LINES][MAX_LENGTH];
+    char temp[MAX_LENGTH];
+    int count = 0;
+    char binary[17];
+    
+    if (argc < 2) {
+        fprintf(stderr, "%s <input_file.dat> <output_file.dat>\n", argv[0]);
+        return 1;
+    }
+    
+    const char *input_path = argv[1];
+    const char *output_path = (argc >= 3) ? argv[2] : "outfile.dat";
+    
+    FILE *file = fopen(input_path, "r");
     if (file == NULL) {
         printf("ERROR: file not detected or cannot read!\n");
         return 1;
     }
 
-    char lines[MAX_LINES][MAX_LENGTH];
-    char temp[MAX_LENGTH];
-    int count = 0;
-    char binary[17];
+    
 
     // Read file and don't read blank line, then add contain to lines[][]
     while (count < MAX_LINES && fgets(temp, MAX_LENGTH, file) != NULL)
@@ -294,7 +303,7 @@ int main() {
 
 
 
-    FILE *outfile = fopen("outfile.dat", "w");
+    FILE *outfile = fopen(output_path, "w");
     if (outfile == NULL) {
         printf("ERROR: can't create outfile.txt!\n");
         return 1;

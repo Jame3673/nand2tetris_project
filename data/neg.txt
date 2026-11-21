@@ -1,0 +1,7 @@
+@5
+D=A
+
+D=-D
+
+@DISPLAY
+M=D
