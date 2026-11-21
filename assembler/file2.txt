@@ -1,2 +1,44 @@
-@1
-D = A
+// --- KHỞI TẠO GIÁ TRỊ ---
+@R2
+M=0         // R2 = 0 (Tổng tích lũy ban đầu)
+
+@2
+D=A
+@R1
+M=D         // R1 = 2 (Số bị nhân)
+
+@3
+D=A
+@R0
+M=D         // R0 = 3 (Số lần cộng)
+
+// --- VÒNG LẶP CỘNG DỒN ---
+(LOOP)
+    @R0
+    D=M
+    @END
+    D;JLE 
+
+    @R2
+    D=M     // Lấy tổng hiện tại ở R2
+    @R1
+    D=D+M   // Cộng thêm R1 (2)
+    @R2
+    M=D     // Lưu lại vào R2
+
+    @R0
+    M=M-1   // Giảm bộ đếm R0 đi 1
+
+    @LOOP
+    0;JMP   // Quay lại kiểm tra điều kiện đầu vòng lặp
+
+// --- XUẤT KẾT QUẢ & DỪNG ---
+(END)
+    @R2
+    D=M
+    @DISPLAY
+    M=D     // Ghi kết quả (6) ra DISPLAY
+
+(HALT)
+    @HALT
+    0;JMP   // Khóa CPU tại chỗ
