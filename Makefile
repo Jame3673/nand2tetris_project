@@ -4,7 +4,3 @@ run : computer_tb.v
 
 %.vvp : %_tb.v
 	iverilog -Wall -o run/$@ $<
-
-
-
-

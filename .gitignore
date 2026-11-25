@@ -1,3 +1,4 @@
 tmp/
 *.out
 .Readme.md
+.ninja_log

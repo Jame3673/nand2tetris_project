@@ -1,0 +1,15 @@
+builddir = run
+
+rule compile_vvp
+  command = iverilog -Wall -o $out $in
+  description = Compiling $in -> $out
+
+rule run_vvp
+  command = vvp $in
+  description = Simulating $in
+
+build run/computer.vvp: compile_vvp computer_tb.v
+
+build run: run_vvp run/computer.vvp
+
+
