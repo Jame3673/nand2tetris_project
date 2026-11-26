@@ -6,10 +6,11 @@ rule compile_vvp
 
 rule run_vvp
   command = vvp $in
-  description = Simulating $in
+  description = Running $in
 
 build run/computer.vvp: compile_vvp computer_tb.v
+build computer.vvp: phony run/computer.vvp
 
 build run: run_vvp run/computer.vvp
 
-
+default run

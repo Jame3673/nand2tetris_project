@@ -8,7 +8,7 @@ module Rom16k(
     reg [15:0] rom [0:32767];
 
     initial begin
-        $readmemb("./data/neg.dat", rom);
+        $readmemb("./data/sub.dat", rom);
     end
 
     assign out = rom[address];

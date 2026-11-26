@@ -1,0 +1,17 @@
+1  |`timescale 1ns / 1ps
+2  |
+3  |module Rom16k(
+4  |    input wire [14:0] address,
+5  |    output wire [15:0] out
+6  |);
+7  |    // Create 32768 array, each have 16 bits size
+8  |    reg [15:0] rom [0:32767];
+9  |
+10 |    // Read and add instruction from file to array
+11 |    initial begin
+12 |        $readmemb("./data/neg.dat", rom);
+13 |    end
+14 |
+15 |    assign out = rom[address];
+16 |
+17 |endmodule

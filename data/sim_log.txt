@@ -1,9 +1,10 @@
 Time=0 | rst=1 | pc=x | writeM=x | addrM=x | outM=xxxxxxxxxxxxxxxx
 Time=3000 | rst=1 | pc=0 | writeM=0 | addrM=x | outM=xxxxxxxxxxxxxxxx
-Time=8000 | rst=1 | pc=0 | writeM=0 | addrM=5 | outM=0000000000000x0x
-Time=10000 | rst=0 | pc=0 | writeM=0 | addrM=5 | outM=0000000000000x0x
-Time=13000 | rst=0 | pc=1 | writeM=0 | addrM=5 | outM=0000000000000101
-Time=18000 | rst=0 | pc=2 | writeM=0 | addrM=5 | outM=1111111111111011
-Time=23000 | rst=0 | pc=3 | writeM=0 | addrM=5 | outM=0000000000000001
-Time=28000 | rst=0 | pc=4 | writeM=1 | addrM=16384 | outM=1111111111111011
-Time=33000 | rst=0 | pc=5 | writeM=x | addrM=16384 | outM=xxxxxxxxxxxxxxxx
+Time=8000 | rst=1 | pc=0 | writeM=0 | addrM=1 | outM=000000000000000x
+Time=10000 | rst=0 | pc=0 | writeM=0 | addrM=1 | outM=000000000000000x
+Time=13000 | rst=0 | pc=1 | writeM=0 | addrM=1 | outM=0000000000000001
+Time=18000 | rst=0 | pc=2 | writeM=0 | addrM=1 | outM=0000000000000001
+Time=23000 | rst=0 | pc=3 | writeM=0 | addrM=2 | outM=1111111111111111
+Time=28000 | rst=0 | pc=4 | writeM=0 | addrM=2 | outM=0000000000000010
+Time=33000 | rst=0 | pc=5 | writeM=1 | addrM=16384 | outM=1111111111111111
+Time=38000 | rst=0 | pc=6 | writeM=x | addrM=16384 | outM=xxxxxxxxxxxxxxxx
